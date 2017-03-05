@@ -1,9 +1,8 @@
 {
-  "name"         : "gas-price-scraper",
+  "name"         : "tomorrows-gas-price-skill",
   "version"      : "0.0.1",
-  "description"  : "scraping for gas prices",
-  "main"         : "server.js",
-  "author"       : "Scotch",
+  "description"  : "alexa skill for tomorrow's gas pricein your area",
+  "main"         : "index.js",
   "dependencies" : {
     "express"    : "latest",
     "request"    : "latest",
