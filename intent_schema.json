@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "intent": "GetTomorrowGasPrice",
+      "slots": [
+        {
+          "name": "Location",
+          "type": "LIST_OF_CITIES"
+        }
+      ]
+    }
+  ]
+}

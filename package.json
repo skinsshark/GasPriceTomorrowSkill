@@ -1,0 +1,12 @@
+{
+  "name"         : "gas-price-scraper",
+  "version"      : "0.0.1",
+  "description"  : "scraping for gas prices",
+  "main"         : "server.js",
+  "author"       : "Scotch",
+  "dependencies" : {
+    "express"    : "latest",
+    "request"    : "latest",
+    "cheerio"    : "latest"
+  }
+}
