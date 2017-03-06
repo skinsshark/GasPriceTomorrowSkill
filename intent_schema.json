@@ -1,10 +1,10 @@
 {
   "intents": [
     {
-      "intent": "GetTomorrowGasPrice",
+      "intent": "GetGasPriceTomorrow",
       "slots": [
         {
-          "name": "Location",
+          "name": "City",
           "type": "LIST_OF_CITIES"
         }
       ]
