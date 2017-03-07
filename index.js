@@ -4,22 +4,23 @@ const request = require('request');
 const cheerio = require('cheerio');
 const app = express();
 
-const APP_ID = 'amzn1.ask.skill.e464ee32-2337-4455-81ab-d45abb936bf7';
+const appId = 'amzn1.ask.skill.e464ee32-2337-4455-81ab-d45abb936bf7';
 
 const responses = {
   STOP_MESSAGE: 'Talk soon!',
   HELP_MESSAGE: 'Ask me for the gas price tomorrow in a specific city',
   LOCATION_ERROR: 'Sorry, I don\'t know about the gas prices in that location',
   LISTEN_ERROR: 'Sorry, I didn\'t hear you correctly',
-  CALL_ERROR: 'My apologies, an error occured. Try later',
+  CALL_ERROR: 'My apologies, an error occured. Try again later',
 }
 
 var handlers = {
 
   'GetGasPriceTomorrow': function () {
 
-    const alexaHandler = this;
+    const url = 'http://www.gasbuddy.com/CAN/ON';
 
+    const alexaHandler = this;
     const voiceCity = alexaHandler.event.request.intent.slots.City.value;
 
     request(url, function(error, response, html) {
@@ -29,7 +30,6 @@ var handlers = {
         const $ = cheerio.load(html);
 
         const city = '#' + voiceCity.charAt(0).toUpperCase() + voiceCity.slice(1); // might not need the slice and uppercasing because seems like it figures that out in my custom slot types. leave for now
-
         const deltaRaw = $(city).parents().eq(2).eq(0).eq(0).text();
         const deltaRegex = /([+-])?\d+(\.\d{1})/g;
         const delta = deltaRaw.match(deltaRegex);
@@ -54,14 +54,15 @@ var handlers = {
 
   },
   'Unhandled': function() {
-      this.emit(':tell', responses.CALL_ERROR);
+    this.emit(':tell', responses.CALL_ERROR);
   }
 
 };
 
 exports.handler = (event, context) => {
   const alexa = Alexa.handler(event, context);
-  alexa.APP_ID = APP_ID;
+  console.log('write console msgs to see in cloudwatch'+event);
+  alexa.APP_ID = appId;
   alexa.registerHandlers(handlers);
   alexa.execute();
 };
